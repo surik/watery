@@ -1,0 +1,16 @@
+TARGET = watery.dge
+CFLAGS = `/opt/mipsel-linux-uclibc/usr/bin/sdl-config --cflags` -Wall -O3
+LIBS = `/opt/mipsel-linux-uclibc/usr/bin/sdl-config --libs` -lSDL_gfx -lSDL_ttf -lSDL_image -lSDL_mixer
+OBJS = main.o App.o Graphics.o Controls.o Audio.o Images.o Font.o Animations.o Sounds.o Music.o Level.o Hero.o
+CXX = mipsel-linux-g++
+
+.SUFFIXES: .cc
+
+.cc.o:
+	$(CXX) $(CFLAGS) -c -o $@ $<
+
+$(TARGET): $(OBJS)
+	$(CXX) -o $@ $^ $(LIBS)
+
+clean:
+	rm -rf ./*.o ./*~ $(TARGET)
